@@ -1,6 +1,6 @@
 #include <iostream>
 #include <sstream>
-#define maxSize 10000;
+#define maxSize 10000
 using namespace std;
 template <class X, class Y>
 class unordered_map
