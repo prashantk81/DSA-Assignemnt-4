@@ -89,32 +89,44 @@ void suffixArray(vector<int> &arrayOfSuffix, vector<int> &hightestPrefix, string
         k++;
     }
 }
+int longestSubstring(vector<int> &highestPrefix, string S, int k)
+{
+    int maximumValue;
+    maximumValue = -1;
+    int stringSize = S.size();
+    int cmpValue = stringSize - k + 1;
+    for (int i = 1; i <= cmpValue; i++)
+    {
+        int temp = stringSize + 1;
+        for (int j = i + 1; j <= i + k - 1; j++)
+        {
+            temp = min(temp, highestPrefix[j]);
+        }
+        maximumValue = max(maximumValue, temp);
+    }
+    if (maximumValue > 0)
+    {
+        return maximumValue;
+    }
+    return -1;
+}
+
 int main()
 {
+    int k;
     string S;
+    cin >> k;
     cin >> S;
-    string combineString;
-    combineString = S + S;
-    int stringSize = combineString.size();
+    int stringSize = S.size();
+    if (k == 1)
+    {
+        cout << stringSize;
+        return 0;
+    }
     vector<int> arrayOfSuffix(stringSize + 1);
     vector<int> highestPrefix(stringSize + 1);
 
-    suffixArray(arrayOfSuffix, highestPrefix, combineString);
-    for (int i = 0; i < arrayOfSuffix.size(); i++)
-    {
-        cout << arrayOfSuffix[i] << " ";
-    }
-    int i = 0;
-    int pos;
-    while (i < stringSize)
-    {
-        if (arrayOfSuffix[i] < S.size())
-        {
-            pos = arrayOfSuffix[i];
-            break;
-        }
-        i++;
-    }
-    cout << combineString.substr(pos, S.size());
+    suffixArray(arrayOfSuffix, highestPrefix, S);
+    cout << longestSubstring(highestPrefix, S, k) << " ";
     return 0;
 }

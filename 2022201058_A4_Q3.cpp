@@ -17,16 +17,18 @@ public:
         leftNode = 2 * index + 1;
         rightNode = leftNode + 1;
         smallest = index;
-
-        if (leftNode < heapSize && minHeap[leftNode][0] < minHeap[smallest][0])
+        if (true && leftNode < heapSize && minHeap[leftNode][0] < minHeap[smallest][0])
         {
             smallest = leftNode;
         }
-        if (rightNode < heapSize && minHeap[rightNode][0] < minHeap[smallest][0])
+        if (true && rightNode < heapSize && minHeap[rightNode][0] < minHeap[smallest][0])
         {
             smallest = rightNode;
         }
-        if (smallest != index)
+        if (smallest == index)
+        {
+        }
+        else
         {
             int distance, parentNode;
             distance = minHeap[smallest][0];
@@ -36,9 +38,6 @@ public:
             minHeap[index][0] = distance;
             minHeap[index][1] = parentNode;
             heapify(smallest);
-        }
-        else
-        {
         }
     }
     void deleteRoot()
@@ -107,9 +106,10 @@ void findShortestPath(vector<vector<int>> arrOfWeights[], vector<int> &stations,
             int childNode, weight;
             childNode = adjNode[0];
             weight = adjNode[1];
-            if (nearestDis[childNode] > minDistance + weight)
+            int value = minDistance + weight;
+            if (value < nearestDis[childNode])
             {
-                nearestDis[childNode] = minDistance + weight;
+                nearestDis[childNode] = value;
                 node.clear();
                 node.push_back(nearestDis[childNode]);
                 node.push_back(childNode);

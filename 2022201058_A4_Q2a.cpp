@@ -120,24 +120,6 @@ public:
             free(currentIndex);
         }
     }
-    bool find(X key)
-    {
-        long long valueOfIndex = findArrayIndex(key);
-        pair *currentIndex = keyValueArray[valueOfIndex];
-        if (!currentIndex)
-        {
-            return false;
-        }
-        while (currentIndex && currentIndex->key != key)
-        {
-            currentIndex = currentIndex->next;
-        }
-        if (!currentIndex)
-        {
-            return false;
-        }
-        return true;
-    }
 
     Y map(X key)
     {
@@ -158,6 +140,24 @@ public:
             return defaultValue;
         }
         return currentIndex->value;
+    }
+    bool find(X key)
+    {
+        long long valueOfIndex = findArrayIndex(key);
+        pair *currentIndex = keyValueArray[valueOfIndex];
+        if (!currentIndex)
+        {
+            return false;
+        }
+        while (currentIndex && currentIndex->key != key)
+        {
+            currentIndex = currentIndex->next;
+        }
+        if (!currentIndex)
+        {
+            return false;
+        }
+        return true;
     }
 };
 
