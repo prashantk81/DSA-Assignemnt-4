@@ -12,47 +12,49 @@ public:
         TotalParties = n;
         SizeOfParties = new int[n + 1];
         Parent = new int[n + 1];
-        for (int i = 0; i <= n; i++)
+        int i = 0;
+        while (i <= n)
         {
             Parent[i] = i;
             SizeOfParties[i] = 1;
+            i++;
         }
     }
 
     int FindParent(int a)
     {
-        if (a == Parent[a])
-        {
-            return a;
-        }
-        else
-        {
-            return Parent[a] = FindParent(Parent[a]);
-        }
+        return a == Parent[a] ? a : Parent[a] = FindParent(Parent[a]);
     }
     void findParties(int a, int b)
     {
         int ParentOfa = FindParent(a);
         int ParentOfb = FindParent(b);
-        if (ParentOfa == ParentOfb)
+        if (ParentOfa != ParentOfb)
         {
-            return;
-        }
-        else
-        {
-            if (SizeOfParties[a] < SizeOfParties[b])
-            {
-                Parent[a] = b;
-                SizeOfParties[ParentOfb] += SizeOfParties[ParentOfa];
-                MaxSize = max(MaxSize, SizeOfParties[ParentOfb]);
-            }
-            else
+            if (SizeOfParties[a] >= SizeOfParties[b])
             {
                 Parent[b] = a;
                 SizeOfParties[ParentOfa] += SizeOfParties[ParentOfb];
-                MaxSize = max(MaxSize, SizeOfParties[ParentOfa]);
+                if (MaxSize < SizeOfParties[ParentOfa])
+                {
+                    MaxSize = SizeOfParties[ParentOfa];
+                }
+            }
+            else
+            {
+
+                Parent[a] = b;
+                SizeOfParties[ParentOfb] += SizeOfParties[ParentOfa];
+                if (MaxSize < SizeOfParties[ParentOfb])
+                {
+                    MaxSize = SizeOfParties[ParentOfb];
+                }
             }
             TotalParties -= 1;
+        }
+        else
+        {
+            return;
         }
     }
 };

@@ -171,40 +171,34 @@ int main()
     {
         int op;
         // Type of operation
-        // 1-> Insert
+        // 1-> Insert1
         // 2-> Erase
         // 3-> Find
         // 4-> map
         cin >> op;
         float key, value;
-        if (op == 1)
+        switch (op)
         {
+        case 1:
             cin >> key >> value;
             mp.insert(key, value);
-        }
-        else if (op == 2)
-        {
-
-            // erase
+            break;
+        case 2:
             cin >> key;
             mp.erase(key);
-        }
-        else if (op == 3)
-        {
-            // find
+            break;
+        case 3:
             cin >> key;
             cout << mp.find(key) << endl;
-        }
-        else if (op == 4)
-        {
-            // value associated with key
+            break;
+        case 4:
             cin >> key;
             cout << mp.map(key) << endl;
-        }
-        else
-        {
+            break;
+        default:
             i--;
             cout << "Invalid Choice" << endl;
+            break;
         }
     }
 }

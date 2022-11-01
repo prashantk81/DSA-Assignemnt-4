@@ -56,8 +56,9 @@ void suffixArray(vector<int> &arrayOfSuffix, vector<int> &hightestPrefix, string
         int k = x;
         while (k--)
         {
-
+            // find array of suffix
             arrayOfSuffix[--windowSize[vt1[vt2[k]]]] = vt2[k];
+            // updating values;
         }
         swap(vt1, vt2);
         p = 1;
@@ -83,9 +84,11 @@ void suffixArray(vector<int> &arrayOfSuffix, vector<int> &hightestPrefix, string
     int d;
     while (k < x - 1)
     {
+        // calculating value of highestprefix;
         for (h &&h--, d = arrayOfSuffix[sizing[k] - 1]; str[k + h] == str[d + h]; h++)
             ;
         hightestPrefix[sizing[k]] = h;
+        // calculating value of longest prefix
         k++;
     }
 }

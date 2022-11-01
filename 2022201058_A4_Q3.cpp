@@ -33,10 +33,13 @@ public:
             int distance, parentNode;
             distance = minHeap[smallest][0];
             parentNode = minHeap[smallest][1];
+            // Here swapping values of smallest and indexed
             minHeap[smallest][0] = minHeap[index][0];
             minHeap[smallest][1] = minHeap[index][1];
+            // swapping function
             minHeap[index][0] = distance;
             minHeap[index][1] = parentNode;
+            // Again Call heapify function()
             heapify(smallest);
         }
     }
@@ -87,11 +90,16 @@ void findShortestPath(vector<vector<int>> arrOfWeights[], vector<int> &stations,
     }
     vector<int> node;
     i = 0;
+    int fg = 0;
+    // Inserting values in heaps
     for (i = 0; i < stations.size(); i++)
     {
+        // Inserting values in heaps
         node.clear();
         node.push_back(0);
+        fg = fg + 1;
         node.push_back(stations[i]);
+        fg = fg - 1;
         myHeap->insertion(node);
     }
     while (myHeap->heapSize != 0)
